@@ -1,14 +1,13 @@
 package com.company;
-
 import javax.swing.*;
 import java.awt.*;
-
 public class BeginGame {
     String step = "O";
     JButton [] array = new JButton[9];
-    JLabel labelWin = new JLabel("u");
+    JButton newGame = new JButton("New game");
+    public static boolean startGame = false;
+    static JLabel labelWin = new JLabel("game");
     static int x = 10;
-
     public void start(){
         JPanel panel = new JPanel();
         BorderLayout borderLayout = new BorderLayout();
@@ -53,10 +52,27 @@ public class BeginGame {
         panel2.add(textField);
         panel.add("North",panel2);
         JPanel panel3 = new JPanel();
-        FlowLayout flowLayout1 = new FlowLayout();
+        GridLayout flowLayout1 = new GridLayout(2,1);
         panel3.setLayout(flowLayout1);
         labelWin.setBackground(Color.cyan);
+        labelWin.setHorizontalAlignment(SwingConstants.CENTER);
         panel3.add(labelWin);
+        newGame.setFocusPainted(false);
+        newGame.setDefaultCapable(false);
+        newGame.setBorderPainted(false);
+        newGame.setSelected(false);
+        newGame.setVerifyInputWhenFocusTarget(false);
+        newGame.setFocusable(false);
+        newGame.setFocusTraversalKeysEnabled(false);
+        newGame.setBackground(Color.BLACK);
+        GridBagConstraints c = new GridBagConstraints();
+// Components
+        c.gridwidth = 1;
+        c.weightx = .01;
+        c.weighty = .2;
+        c.gridx = 0;
+        c.gridy = 1;
+        panel3.add(newGame,c);
         panel.add("South",panel3);
         JFrame frame = new JFrame("TicTacToe");
         frame.setBackground(Color.magenta);
@@ -64,6 +80,7 @@ public class BeginGame {
         frame.setSize(300,300);
         frame.setVisible(true);
         Action action = new Action(this);
+        newGame.addActionListener(action);
         array[0].addActionListener(action);
         array[1].addActionListener(action);
         array[2].addActionListener(action);
@@ -73,7 +90,5 @@ public class BeginGame {
         array[6].addActionListener(action);
         array[7].addActionListener(action);
         array[8].addActionListener(action);
-
-
     }
 }
